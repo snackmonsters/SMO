@@ -2,12 +2,18 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import RegisterEmail from '../components/Register/RegisterEmail'
 import RegisterEmailCheck from '../components/Register/RegisterEmailCheck'
+import Home from '../components/Home'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/',
+      name: 'Home',
+      component: Home
+    },
     {
       path: '/registeremail',
       name: 'RegisterEmail',
