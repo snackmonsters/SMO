@@ -1,15 +1,28 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import RegisterEmail from '../components/Register/RegisterEmail'
+import RegisterEmailCheck from '../components/Register/RegisterEmailCheck'
+import Home from '../components/Home'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'Home',
+      component: Home
+    },
+    {
+      path: '/registeremail',
+      name: 'RegisterEmail',
+      component: RegisterEmail
+    },
+    {
+      path: '/registeremailcheck',
+      name: 'RegisterEmailCheck',
+      component: RegisterEmailCheck
     }
   ]
 })
