@@ -5,7 +5,12 @@
 </template>
 
 <script>
+import Header from './components/template/Header'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    'main-header' : Header,
+  }
 }
 </script>
