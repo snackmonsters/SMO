@@ -9,6 +9,9 @@ var mongoose = require('mongoose')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+/* Mongo DB */
+var mongoAuth = require('../keys/mongo.json')
+var mongoose = require('mongoose') 
 var mongoconfig = require('./config/Mongo.json')
 
 var app = express();
@@ -31,7 +34,10 @@ app.use(bodyParser.json())
 mongoose.Promise = global.Promise
 
 // connect to mongoserver
-mongoose.connect(mongoconfig.mongoURI, {useNewUrlParser: true}).then(
+// mongodb://username:password@host:port/database?options...
+mongoURI = "mongodb://"+mongoAuth.id+":"+mongoAuth.pw+"@"+mongoconfig.mongoURI+":"+mongoconfig.PORT+"/"+mongoconfig.database+"?authSource=admin"
+console.log(mongoURI)
+mongoose.connect(mongoURI, {useNewUrlParser: true}).then(
   () => console.log('successfully connected!')
 ).catch(e => console.error(e))
 
