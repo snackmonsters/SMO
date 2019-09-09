@@ -117,3 +117,7 @@ npm install
 npm start
 ```
 
+### 일괄 실행 방법
+
+최상 경로(SMO)의 buildNrun.bat을 실행합니다.
+(탐색기에서 실행하거나 해당 경로에서 터미널을 열어 ./buildNrun을 입력하여 실행합니다)
