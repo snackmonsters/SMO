@@ -1,3 +1,4 @@
 {
-    "mongoURI":"mongodb://70.12.247.38:27017/local" 
+    "mongoURI":"mongodb://13.124.78.221/SMO" ,
+    "PORT":"27017"
 }
