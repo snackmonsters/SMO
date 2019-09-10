@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var user = require('../models/user')
+var userService = require('../services/UserService/userService')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -13,21 +13,25 @@ router.get('/hi', function(req, res, next) {
 
 
 router.get('/email', function(req, res, next) {
-  user.find(function(err, users){
-    if(err) return res.status(500).send({error: 'database find failure'})
-    res.send(users)
-  })
+  // 유저 이메일 받아서 유저 정보를 반환한다
+  var email = req.params.email
+  userInfo = userService.findUserByEmail(email)
+  res.send(userInfo)
 })
 
-// router.post('/registeremail', (req, res) => res.json)
+router.post('/registeremail', (req, res) => res.json) {
+  // 유저 정보를 받아 DB에 저장한다.
+  var user;
+  userService.registerUser(user);
+}
 
 
-router.get('email/:email', function(req, res) {
-  user.findOne({email: req.params.email}, function(err, user){
-    if(err) return res.status(500).send({error: 'database find failure'})
-    if(!user) return res.status(404).send({error: 'user not found'})
-    res.json(user)
-  })
-})
+// router.get('email/:email', function(req, res) {
+//   user.findOne({email: req.params.email}, function(err, user){
+//     if(err) return res.status(500).send({error: 'database find failure'})
+//     if(!user) return res.status(404).send({error: 'user not found'})
+//     res.json(user)
+//   })
+// })
 
 module.exports = router;
