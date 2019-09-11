@@ -14,5 +14,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 
 export default {
-  name: 'firebaseService'
+  name: 'firebaseService',
+  firebaseConfig: firebaseConfig,
+  firebase: firebase
 }

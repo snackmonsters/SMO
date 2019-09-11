@@ -19,11 +19,14 @@ router.get('/email', function(req, res, next) {
   res.send(userInfo)
 })
 
-router.post('/registeremail', (req, res) => res.json) {
-  // 유저 정보를 받아 DB에 저장한다.
-  var user;
-  userService.registerUser(user);
-}
+router.post('/registeremail', function(req, res) {
+  // 유저 메일을 받아 DB에 저장한다.
+  console.log('haha')
+  var user = userService.findUserByEmail(req.params.email);
+  if(!user) {
+    userService.registerUser(req.params.email);
+  }
+})
 
 
 // router.get('email/:email', function(req, res) {

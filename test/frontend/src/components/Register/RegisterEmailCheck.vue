@@ -2,7 +2,7 @@
   <div>
     <h2>이메일 인증을 완료해주세요!</h2>
     <br/>
-    <h3>{{RegisterEmail}}</h3>
+    <h3>{{registerEmail}}</h3>
     
     <h3>이메일로 받으신 인증을 완료해주세요.</h3>
     <br/>
@@ -26,8 +26,9 @@ export default {
     }
   },
   computed: {
-    ...mapState(
+    ...mapState([
       'registerEmail'
+    ]
     )
   }
 }

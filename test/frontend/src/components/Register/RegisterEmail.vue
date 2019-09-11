@@ -4,14 +4,14 @@
     <h2>입력해주세요</h2>
     <form @submit.prevent="onSubmit">
         <input placeholder="이메일을 입력해주세요" type="email" v-model="emailaddress">
-        <input type="button" value="Next" v-model="EmailMessage">
+        <input type="submit" value="Next" v-model="EmailMessage">
     </form>
   </div>
 </template>
 
 <script>
 import loginService from '../../service/loginService.js'
-import { mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'RegisterEmail',
@@ -21,16 +21,14 @@ export default {
         EmailMessage: 'Next'
     }
   },
-  computed: {
-    ...mapGetters(
-      'setRegisterEmail'
-    )
-  },
   methods: {
       onSubmit() {
           this.setRegisterEmail(this.emailaddress)
-          this.$router.push({name: 'registeremailcheck', params: { id: this.id }})
-      }
+          this.$router.push({name: 'RegisterPassword'})
+      },
+      ...mapActions([
+         'setRegisterEmail'
+      ])
   }
 }
 </script>

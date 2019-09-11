@@ -1,12 +1,14 @@
 import axios from 'axios'
 import firebaseService from './firebaseService'
 
+// firebase.initializeApp(firebaseService.firebaseConfig)
+// console.log(firebaseService.firebaseConfig)
 const BASE_URL = '/api'
 
 const postUserEmail = (email) => {
   return axios.post(BASE_URL + '/registeremail', {
     params: {
-      'uid': email
+      'email': email
     }
   })
 }
@@ -23,31 +25,35 @@ const getUsers = () => {
 }
 
 export default {
-  signUp (email, password, name) {
-    if (email.length < 4) {
-      alert('Please enter an email address.')
-      return
-    }
-    if (password.length < 4) {
-      alert('Please enter a password.')
-      return
-    }
+  async signUp (email, password) {
+    // if (email.length < 4) {
+    //   alert('Please enter an email address.')
+    //   return
+    // }
+    // if (password.length < 4) {
+    //   alert('Please enter a password.')
+    //   return
+    // }
 
-    if (name.length < 4) {
-      alert('Please enter name')
-      return
-    }
+    // if (name.length < 4) {
+    //   alert('Please enter name')
+    //   return
+    // }
 
     // Sign in with email and pass.
     // [START createwithemail]
-    return firebaseService.firebase.auth().createUserWithEmailAndPassword(email, password).then(function (data) {
-      data.user.updateProfile({
-        displayName: name
-      })
-      var date = data.user.metadata.creationTime
+    
+    postUserEmail(email)
+
+    const createUser = await firebaseService.firebase.auth().createUserWithEmailAndPassword(email, password).then(function (data) {
+      // data.user.updateProfile({
+      //   displayName: name
+      // })
+      // var date = data.user.metadata.creationTime
       /*
         백엔드에서 유저 등록을 위한 코드
       */
+
       return data.user
     }).catch(function (error) {
       // Handle Errors here.
@@ -62,6 +68,7 @@ export default {
       console.log(error)
       // [END_EXCLUDE]
     })
+    return createUser
   },
 
   signIn (email, password) {
@@ -133,5 +140,15 @@ export default {
     })
 
     return signInResult
+  },
+  verifyingEmail () {
+    var user = firebaseService.firebase.auth().currentUser
+    console.log(user)
+    firebaseService.firebase.auth().languageCode = 'ko'
+    user.sendEmailVerification().then(function () {
+      // Email sent.
+    }).catch(function (error) {
+      console.log(error)
+    })
   }
 }

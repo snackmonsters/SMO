@@ -16,4 +16,13 @@ var user = new Schema({
     regDate: String
 })
 
+user.statics.create = function(payload) {
+    const newUser = new this(payload)
+    return newUser.save()
+}
+
+user.statics.findOneByEmail = function(email) {
+    return this.findOne({email: email})
+}
+
 module.exports = mongoose.model('user', user)

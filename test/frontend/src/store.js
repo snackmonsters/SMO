@@ -7,11 +7,11 @@ export default new Vuex.Store({
   state: {
     registerEmail: ''
   },
-  getters: {
+  actions: {
     getRegisterEmail: state => {
       return state.registerEmail
     },
-    setRegisterEmail ({commit}, email) {
+    setRegisterEmail ({ commit }, email) {
       commit('setRegisterEmail', email)
     }
   },
