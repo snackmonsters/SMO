@@ -4,11 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser')
-var mongoose = require('mongoose') 
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var studysRouter = require('./routes/studys')
 
+/* Mongo DB */
+var mongoAuth = require('../keys/mongo.json')
+var mongoose = require('mongoose') 
 var mongoconfig = require('./config/Mongo.json')
 
 var app = express();
@@ -31,13 +34,16 @@ app.use(bodyParser.json())
 mongoose.Promise = global.Promise
 
 // connect to mongoserver
-mongoose.connect(mongoconfig.mongoURI, {useNewUrlParser: true}).then(
+// mongodb://username:password@host:port/database?options...
+mongoURI = "mongodb://"+mongoAuth.id+":"+mongoAuth.pw+"@"+mongoconfig.mongoURI+":"+mongoconfig.PORT+"/"+mongoconfig.database+"?authSource=admin"
+console.log(mongoURI)
+mongoose.connect(mongoURI, {useNewUrlParser: true}).then(
   () => console.log('successfully connected!')
 ).catch(e => console.error(e))
 
 app.use('/api', indexRouter);
 app.use('/users', usersRouter);
-
+app.use('/studys', studysRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
